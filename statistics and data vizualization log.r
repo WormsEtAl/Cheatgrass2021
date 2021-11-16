@@ -216,7 +216,7 @@ abundsort.otutablewt<-otutablewt[order(otutablewt$Total, decreasing = TRUE),]
 sub.abundsort.otutablewt<-as.matrix(abundsort.otutablewt[1:30,order(colnames(abundsort.otutablewt[,1:15]))])
 total.tax<-subset(abundsort.otutablewt, select = colnames(abundsort.otutablewt) == "Taxonomy")
 
-# ANOVAs for top 30 abundant taxa
+# Statistics for top 30 abundant taxa
 tab<-sub.abundsort.otutablewt
 tax<-total.tax
 
@@ -252,7 +252,7 @@ prop.mat.otutable<-(prop.table(as.matrix(abundsort.otutablewt[,1:15]), 2)*100)
 sub.abundsort.prop.mat.otutable<-prop.mat.otutable[1:30,order(colnames(prop.mat.otutable))]
 relative.tax<-subset(abundsort.otutablewt, select = colnames(abundsort.otutablewt) == "taxonomy")
 
-# ANOVAS for Top 30 abundant taxa
+# Statistics for top 30 abundant taxa
 tab<-sub.abundsort.prop.mat.otutable
 tax<-relative.tax
 
@@ -290,7 +290,7 @@ print(mi)
 # Tell R where to find you metadata file
 map_name<-"Moisture_soil.csv"
 # Tell R where to find your community data file
-table_name<-"Cheatgrass_Bacteria_Group_ESV.csv"
+table_name<-"Cheatgrass_Bacteria_Group_ESV.csv" # a table of trophically condensed taxa; this code will reference a bacteria dataset
 
 #Import community table
 otutablewt <- read.csv(file=table_name, comment.char="", header=T, row.names=1, stringsAsFactors=T, check.names=FALSE)
@@ -343,7 +343,7 @@ rownames(final.total.trophic)<-total.troph
 tab<-final.total.trophic
 tax<-total.troph
 
-# Abundance stats
+# Statistics for abundant taxa
 for(i in 1:nrow(tab)){
 mi<-aov(as.numeric(tab[i,]) ~ Treatment, data=order.sub.map)
 name<-rownames(tab)[i]
@@ -394,6 +394,7 @@ rownames(order.prop.mat.otutable)<-total.troph
 tab<-order.prop.mat.otutable
 tax<-total.troph
 
+# Statistics for abundant taxa
 for(i in 1:nrow(tab)){
 # T.test
 for(i in 1:nrow(tab)){
